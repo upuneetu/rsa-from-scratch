@@ -57,21 +57,21 @@ int64_t modular_inverse(int64_t a, int64_t n){
 
 int64_t modular_exponentiation(int64_t a, int64_t p, int64_t n){
 	int64_t accumulator = 1;
-
+	a = a%n;
 	while(p>0){
-		if(p%2){
-			accumulator *= a;
+
+		if(p&1){
+			accumulator = (accumulator * a)%n;
 			p--;
 		}
-		else{
-			accumulator *= (a*a);
-			p /= 2;
-		}
+		
+		a = (a * a)%n;
+		p = p >> 1;
 	}
 
-	return accumulator;
+	return accumulator%n;
 }
-/*
+
 int jacobi_symbol(int64_t a, int64_t b){
 	
 	if(b%2==0)
@@ -87,7 +87,7 @@ int jacobi_symbol(int64_t a, int64_t b){
 				accumulator *= -1;		
 		}
 
-		else if(a<b){
+		if(a<b){
 			if( (a-1)%4 != 0 && (b-1)%4 != 0 )
 				accumulator *= -1;
 			int64_t temp = a;
@@ -101,9 +101,9 @@ int jacobi_symbol(int64_t a, int64_t b){
 	if(b==1)
 		return accumulator;
 	return 0;
-}*/
+}
 
-int jacobi_symbol(int64_t a, int64_t b){
+/*int jacobi_symbol(int64_t a, int64_t b){
 
 	if(b<=0 || b%2 == 0)
 		return 0;
@@ -135,3 +135,4 @@ int jacobi_symbol(int64_t a, int64_t b){
 	
 		return 0;
 }
+*/
