@@ -7,7 +7,7 @@ std::tuple<int64_t, int64_t, int64_t> x_gcd(int64_t n1,int64_t n2);
 int64_t modular_inverse(int64_t a, int64_t n);
 int64_t modular_exponentiation(int64_t a, int64_t p, int64_t n);
 int jacobi_symbol(int64_t a, int64_t b);
-int64_t pseudo_random_bit_generator(int bits_size);
+
 
 int64_t gcd(int64_t n1,int64_t n2){
 
@@ -138,7 +138,3 @@ int jacobi_symbol(int64_t a, int64_t b){
 }
 */
 
-int64_t pseudo_random_prime_generator(int bits_size){
-	srand(time(NULL));
-	rand()%(pow(2,bits_size));
-}
