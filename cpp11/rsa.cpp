@@ -1,9 +1,8 @@
 #include "primality_tests.cpp"
-#include "prime_helper.cpp"
 #include <cmath>
 #include <utility>
 
-int64_t pseudo_random_prime_generator(int bits_size,primality_test_string);
+int64_t pseudo_random_prime_generator(int bits_size,std::string primality_test_string);
 class RSA{
 private:
 	std::string primality_test;
@@ -57,7 +56,7 @@ int64_t RSA::decrypt_block(int64_t cipher_text_block){
 	return plain_text_block;
 }
 
-int64_t pseudo_random_prime_generator(int bits_size,primality_test_string){
+int64_t pseudo_random_prime_generator(int bits_size, std::string primality_test_string){
 	srand(time(NULL));
 	int64_t range = pow(2,bits_size-1);
 	int64_t num = range + rand()%(range);

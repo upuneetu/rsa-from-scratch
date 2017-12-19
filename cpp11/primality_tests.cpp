@@ -94,7 +94,7 @@ bool miller_rabin_primality_test(int64_t n, int64_t k=10){
 
 bool primality_test(int64_t n,std::string primality_test_string){
 	if(primality_test_string.compare("solvay_strassen"))
-		return solvay_strassen(n);
+		return solvay_strassen_primality_test(n);
 	if(primality_test_string.compare("miller_rabin"))
-		return miller_rabin(n);
+		return miller_rabin_primality_test(n);
 }
