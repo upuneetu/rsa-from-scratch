@@ -2,16 +2,16 @@
 #include <tuple>
 #include <iostream>
 
-int64_t gcd(int64_t n1,int64_t n2);
-std::tuple<int64_t, int64_t, int64_t> x_gcd(int64_t n1,int64_t n2);
-int64_t modular_inverse(int64_t a, int64_t n);
-int64_t modular_exponentiation(int64_t a, int64_t p, int64_t n);
-int jacobi_symbol(int64_t a, int64_t b);
+uint64_t gcd(uint64_t n1,uint64_t n2);
+std::tuple<uint64_t, uint64_t, uint64_t> x_gcd(uint64_t n1,uint64_t n2);
+uint64_t modular_inverse(uint64_t a, uint64_t n);
+uint64_t modular_exponentiation(uint64_t a, uint64_t p, uint64_t n);
+int jacobi_symbol(uint64_t a, uint64_t b);
 
 
-int64_t gcd(int64_t n1,int64_t n2){
+uint64_t gcd(uint64_t n1,uint64_t n2){
 
-	int64_t temp;
+	uint64_t temp;
 	
 	while(n1>0){
 		temp = n1;
@@ -22,11 +22,11 @@ int64_t gcd(int64_t n1,int64_t n2){
 	return n2;
 }
 
-std::tuple<int64_t, int64_t, int64_t> x_gcd(int64_t n1,int64_t n2){
-	int64_t prev_x = 0, x = 1, prev_y = 1, y = 1;
-	int64_t temp;
+std::tuple<uint64_t, uint64_t, uint64_t> x_gcd(uint64_t n1,uint64_t n2){
+	uint64_t prev_x = 0, x = 1, prev_y = 1, y = 1;
+	uint64_t temp;
 	while(n1>0){
-		int64_t quotient = n2/n1;
+		uint64_t quotient = n2/n1;
 		temp = x;
 		x = prev_x - quotient * x;
 		prev_x = temp;
@@ -43,9 +43,9 @@ std::tuple<int64_t, int64_t, int64_t> x_gcd(int64_t n1,int64_t n2){
 	return std::make_tuple(prev_x, prev_y, n2);
 }
 
-int64_t modular_inverse(int64_t a, int64_t n){
+uint64_t modular_inverse(uint64_t a, uint64_t n){
 	
-	int64_t inv1,inv2,gcd;
+	uint64_t inv1,inv2,gcd;
 	std::tie (inv1,inv2,gcd) = x_gcd(a,n);
 
 	if(gcd>1)
@@ -56,8 +56,8 @@ int64_t modular_inverse(int64_t a, int64_t n){
 
 }
 
-int64_t modular_exponentiation(int64_t a, int64_t p, int64_t n){
-	int64_t accumulator = 1;
+uint64_t modular_exponentiation(uint64_t a, uint64_t p, uint64_t n){
+	uint64_t accumulator = 1;
 	a = a%n;
 	while(p>0){
 
@@ -73,7 +73,7 @@ int64_t modular_exponentiation(int64_t a, int64_t p, int64_t n){
 	return accumulator%n;
 }
 
-int jacobi_symbol(int64_t a, int64_t b){
+int jacobi_symbol(uint64_t a, uint64_t b){
 	
 	if(b%2==0)
 		return 0;
@@ -91,7 +91,7 @@ int jacobi_symbol(int64_t a, int64_t b){
 		if(a<b){
 			if( (a-1)%4 != 0 && (b-1)%4 != 0 )
 				accumulator *= -1;
-			int64_t temp = a;
+			uint64_t temp = a;
 			a = b ;
 			b = temp;
 		}
@@ -104,7 +104,7 @@ int jacobi_symbol(int64_t a, int64_t b){
 	return 0;
 }
 
-/*int jacobi_symbol(int64_t a, int64_t b){
+/*int jacobi_symbol(uint64_t a, uint64_t b){
 
 	if(b<=0 || b%2 == 0)
 		return 0;
@@ -122,7 +122,7 @@ int jacobi_symbol(int64_t a, int64_t b){
 				accumulator *= -1;
 		}
 
-		int64_t temp = b;
+		uint64_t temp = b;
 		b = a;
 		a = temp;
 
